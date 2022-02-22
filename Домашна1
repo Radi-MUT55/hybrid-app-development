@@ -1,0 +1,84 @@
+zad1 СБОР
+
+function sum (arr){
+    let num1 =  Number(arr[0]);
+    let num2 =  Number(arr[1]);
+    let num3 = Number(arr[2]);
+    let sum = num1+num2+num3;
+    
+    console.log (sum);
+}
+sum(['2','3','4']);
+
+ЗАДАЧА 2 ----------------------СУМА ДДС
+
+
+function caclSumAndVat (arr){
+    let sum =0;
+    for(let price of arr){
+        sum += Number(price);
+    }
+    console.log({sum});
+
+    let vat = sum*0.2;
+    console.log({vat});
+    
+let total = sum + vat;
+    console.log({total});
+}
+caclSumAndVat(['1.20', '2.60','3.50']);
+
+
+ЗАДАЧА - 3 ------------------------------ БРОИ ОПРЕДЕЛЕНА БУКВА
+
+function countLetter([string,letter]){
+    let count =0;
+    
+    for(let char of string){
+        if(char ==letter){
+            count++;
+        }
+    }
+    console.log({count});
+}
+
+countLetter(['telephone', 'e']);
+
+ЗАДАЧА-- 4---------------------------------------------------    
+FIGURA
+
+ function figureArea([w,h,W,H]){
+            let fig1Area = Number (w) * Number(h);
+             let fig2Area = Number (W) * Number(H);
+            let commonArea = Math.min(Number(w), Number(W)) *Math.min(Number(h), Number(H));
+        let figureArea = fig1Area + fig2Area - commonArea;
+        console.log(figureArea);
+            
+        }
+figureArea(['2','4','5','3']);
+
+
+ЗАДАЧА -- 5 --------------------------------------------------------------------------------
+function leapYear(year){
+    let condOne = year % 4==0 && year %100!=0;
+    let condTwo =year % 400 ==0;
+    if (condOne || condTwo){
+        console.log('yes');
+        return;
+    }
+    console.log('no');
+}
+leapYear(1999);
+leapYear(2020);
+
+ЗАДАЧА - 6 -----------------------------------------------------------------------
+
+function stringOfNumbers(lastNum){
+    let result = '';
+    for (let i = 1; i<=lastNum; i++){
+        result +=i;
+    }
+    console.log(result);
+}
+stringOfNumbers(10);
+stringOfNumbers(20);

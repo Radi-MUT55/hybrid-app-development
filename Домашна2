@@ -1,0 +1,225 @@
+ЗАДАЧА 1
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Sum Numbers</title>
+</head>
+<body>
+<input type="text" id="num1"/>+
+<input type="text" id="num2" />=
+<input type="text"  id="sum" readonly/>
+<input type="button" value="calc" onclick="calc()" />
+<script >
+	function calc(){
+		let num1= Number(document.getElementById('num1').value);
+		let num2= Number(document.getElementById('num2').value);
+		let sum =num1+num2;
+		document.getElementById('sum').value=sum;
+	}
+
+	
+</script>
+</body>
+</html>>
+
+----------------------------------------------------------------------------
+ЗАДАЧА 2 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>List of items</title>
+</head>
+
+<body>
+
+ <h1>List of items</h1>
+
+ <ul id="items">
+
+ 	<li>First</li>
+ 	<li>Second</li>
+ </ul>
+
+ <input type="text" id="newItemText"/>
+ <input type="button" value="Add" onclick="addItem()">
+
+ <script>
+
+ 	function addItem(){
+ 		let newLi = document.createElement('li');
+ 		newLi.textContent = document.getElementById('newItemText').value;
+ 		document.getElementById('items').appendChild(newLi);
+ 		document.getElementById('newItemText').value = "";
+ 	}
+ </script>
+</body>
+</html>
+------------------------------------------------------------------------------
+ЗАДАЧА 3
+
+HTML-CODE
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>City list/ search</title>
+ <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="search3.js"></script>
+</head>
+
+<body>
+    <ul id="towns">
+        <li>Sofia</li>
+        <li>Pleven</li>
+        <li>Varna</li>
+        <li>Plovdiv</li>
+    </ul>
+    <input type="text" id="searchText" />
+    <button onclick="search()">Search</button>
+    <div id="result"></div>
+</body>
+
+</html>
+-=========
+JS-CODE
+==========
+
+	 let towns = $('#towns li').toArray();
+
+	 for (let town of towns) {
+	 	if (town.textContent.indexOf(text) !=-1){
+	 		matches++;
+	 		$(town).css('font-weight','bold');
+
+	 	}else {
+	 		$(town).css('font-weight','');	 
+	 			}
+	 }
+	 $('#result').text(matches + 'matches found.');
+}
+--------------------------------------------------------------------------
+
+
+ЗАДАЧА 4
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <form id="registerForm">
+            <fieldset id="userInfo">
+                <legend>User Information:</legend>
+                <div class="pairContainer">
+                    <label for="username">Userame:</label>
+                    <input id="username" type="text">
+                </div>
+                <div class="pairContainer">
+                    <label for="email">Email:</label>
+                    <input id="email" type="text">
+                </div>
+                <div class="pairContainer">
+                    <label for="password">Passwrod:</label>
+                    <input id="password" type="password">
+                </div>
+                <div class="pairContainer">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input id="confirm-password" type="password">
+                </div>
+                <div class="pairContainer">
+                    <label for="company">Is Company?</label>
+                    <input id="company" type="checkbox">
+                </div>
+            </fieldset>
+            <fieldset id="companyInfo" style="display: none;">
+                <legend>Company Informaion:</legend>
+                <div class="pairContainer">
+                    <label for="companyNumber">Company Number</label>
+                    <input id="companyNumber" type="number">
+                </div>
+            </fieldset>
+            <button id="submit">Submit</button>
+        </form>
+        <div id="valid" style="display: none">Valid</div>
+    </div>
+    <script src="functionValidate4.js"></script>
+    <script>
+        window.onload = function() {
+            validate();
+        }
+    </script>
+</body>
+
+</html>
+==========================
+JS CODE
+===================
+function validate() {
+    $('#company').on('change', showHideCompany);
+
+    $('#submit').on('click', function(ev) {
+        ev.preventDefault();
+		
+        let usernameRegex = /^[a-zA-Z0-9]{3,20}$/;
+        let passwordRegex = /^\w{5,15}$/;
+        let emailRegex = /@.*\./;
+        let companyNumberRegex = /^[1-9]{1}[0-9]{3}$/;
+
+        let allFieldsValid = true;
+
+        if($('#username').val().match(usernameRegex)){
+            $('#username').css('border','none');
+            } else{
+             $('#username').css('border-color','red');
+                allFieldsValid=false;
+
+            }
+
+            if($('#email').val().match(emailRegex)){
+                $('#email').css('border','none');
+            } else{
+                $('#email').css('border-color','red');
+                allFieldsValid=false;
+
+            }
+
+            if($('#password').val().match(passwordRegex)){
+                $('#password').css('border','none');
+            } else{
+                $('#password').css('border-color','red');
+                allFieldsValid=false;
+
+            }
+
+            if($('#confirm-password').val().match (passwordRegex)&& 
+                $('#confirm-password').val().localeCompare($('#password').val())==0){
+                $('#confirm-password').css('border','none');
+            } else{
+                $('#confirm-password').css('border-color','red');
+                allFieldsValid=false;
+
+            }
+
+             
+
+    });
+
+    function showHideCompany() {
+        if ($(this).is(':checked')) {
+            $('#companyInfo').css('display', 'block');
+        } else {
+            $('#companyInfo').css('display', 'none')
+        }
+    }
+}
